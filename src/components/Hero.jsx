@@ -107,7 +107,7 @@ const Hero = () => {
                     </AnimatedSection>
                     <AnimatedSection variants={fadeInRight}>
                         <a href="#contact">
-                            <button className="btn btn-outline btn-primary rounded-full px-8 text-base flex items-center gap-2 border-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:scale-110 transition-all">
+                            <button className="btn btn-outline btn-primary rounded-full mb-0 lg:mb-3 px-8 text-base flex items-center gap-2 border-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:scale-110 transition-all">
                                 Contact Me
                             </button>
                         </a>
