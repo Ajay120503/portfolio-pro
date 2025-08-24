@@ -45,7 +45,7 @@ function EducationTimeline() {
 
                 {/* Timeline */}
                 <AnimatedSection variants={bounceInUp}>
-                    <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical relative">
+                    <ul className="timeline timeline-snap-icon max-lg:timeline-compact timeline-vertical relative">
                         {education.map((item, index) => {
                             const isLeft = index % 2 === 0;
 
@@ -81,15 +81,14 @@ function EducationTimeline() {
                                         >
                                             {/* Connector */}
                                             <span
-                                                className={`lg:absolute top-3 w-3 lg:h-[5px] bg-secondary/70 ${isLeft
+                                                className={`lg:absolute top-3 w-3 lg:h-[5px] bg-base-200/60 ${isLeft
                                                     ? "lg:left-auto lg:-right-3"
                                                     : "lg:-left-3 lg:right-auto"
                                                     } -left-0 h-0`}
                                             ></span>
 
                                             <time
-                                                className={`font-mono italic text-sm 
-                                                            text-primary ${isLeft ? "lg:text-primary" : "lg:text-secondary"}`}
+                                                className="font-mono italic text-sm text-primary lg:text-primary"
                                             >
                                                 {item.year}
                                             </time>

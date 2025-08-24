@@ -94,11 +94,11 @@ export const THEMES = [
   //   label: "Black",
   //   colors: ["#000000", "#191919", "#313131", "#4a4a4a"],
   // },
-  // {
-  //   name: "luxury",
-  //   label: "Luxury",
-  //   colors: ["#171618", "#1e293b", "#94589c", "#d4a85a"],
-  // },
+  {
+    name: "luxury",
+    label: "Luxury",
+    colors: ["#171618", "#1e293b", "#94589c", "#d4a85a"],
+  },
   {
     name: "dracula",
     label: "Dracula",

@@ -31,7 +31,7 @@ const navItemVariants = {
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    // ✅ Use scroll spy to track active section
+    // Use scroll spy to track active section
     const activeSection = useScrollSpy(
         navItems.map((item) => item.id),
         120 // offset to trigger a bit before section hits top
@@ -40,7 +40,7 @@ const Navbar = () => {
     const handleScroll = (id) => {
         const section = document.getElementById(id);
         if (section) {
-            const yOffset = -70; // adjust for navbar height
+            const yOffset = -70;
             const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
             setMenuOpen(false);
