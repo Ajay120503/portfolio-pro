@@ -16,7 +16,7 @@ const Hero = () => {
 
             <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
                 {/* Typing Heading */}
-                <AnimatedSection variants={bounceIn} className="text-center">
+                <AnimatedSection variants={bounceIn} className="text-center h-20">
                     <Typingtext
                         as="h1"
                         initialDelay={500}
@@ -44,7 +44,9 @@ const Hero = () => {
                             [
                                 { text: "I build ", className: "" },
                                 { text: "Secure", className: "text-info font-semibold" },
-                                { text: ", Scalable, and Responsive Apps", className: "" },
+                                { text: ", Scalable ", className: "text-warning font-bold" },
+                                { text: "and ", className: "" },
+                                { text: "Responsive Apps", className: "text-primary font-semibold" },
                             ],
                         ]}
                     />
@@ -97,7 +99,7 @@ const Hero = () => {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mt-10">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center my-5 px-6">
                     <AnimatedSection variants={fadeInLeft}>
                         <a href="#projects">
                             <button className="btn btn-primary rounded-full px-8 text-base flex items-center gap-2 shadow-lg hover:shadow-[0_0_25px_rgba(0,200,255,0.7)] hover:scale-110 transition-all">
@@ -107,7 +109,7 @@ const Hero = () => {
                     </AnimatedSection>
                     <AnimatedSection variants={fadeInRight}>
                         <a href="#contact">
-                            <button className="btn btn-outline btn-primary rounded-full lg:mb-0 mb-5 px-8 text-base flex items-center gap-2 border-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:scale-110 transition-all">
+                            <button className="btn btn-outline btn-primary rounded-full px-8 text-base flex items-center gap-2 border-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:scale-110 transition-all">
                                 Contact Me
                             </button>
                         </a>

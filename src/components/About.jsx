@@ -12,7 +12,11 @@ import { SiTailwindcss, SiPostgresql, SiMongodb } from "react-icons/si";
 import { Download } from "lucide-react";
 import RESUME from "../Documents/RESUME.pdf";
 import AnimatedSection from "../Animations/AnimatedSection";
-import { bounceIn } from "../Animations/sectionVariants";
+import {
+    bounceIn,
+    bounceStaggeredItem,
+    bounceStaggeredContainer,
+} from "../Animations/sectionVariants";
 
 const skills = [
     { icon: <FaReact className="text-sky-500" />, name: "React.js" },
@@ -26,7 +30,6 @@ const skills = [
     { icon: <FaDatabase className="text-gray-600" />, name: "SQL" },
 ];
 
-// Random border styles for variation
 const randomBorders = [
     "rounded-lg",
     "rounded-xl",
@@ -42,10 +45,12 @@ function About() {
             id="about"
             className="relative flex items-center justify-center bg-base-200/60 backdrop-blur-lg text-base-content overflow-hidden"
         >
+            {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-24 relative">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-12 items-center relative">
+
                     {/* Left: About Me */}
                     <AnimatedSection variants={bounceIn}>
                         <div className="p-6 rounded-2xl bg-base-100/60 shadow-lg backdrop-blur-xl border border-base-content/10">
@@ -77,7 +82,7 @@ function About() {
                             <a
                                 href={RESUME}
                                 download
-                                className="btn btn-primary mt-8 rounded-full px-8 text-base items-center gap-2 shadow-lg hover:shadow-[0_0_20px_var(--p)] transition-all duration-300"
+                                className="btn btn-primary mt-8 rounded-full px-8 text-base items-center gap-2 shadow-lg hover:shadow-[0_0_20px_var(--p)] transition-all duration-300 flex"
                             >
                                 <Download className="h-5 w-5 animate-bounce" /> Download Resume
                             </a>
@@ -85,40 +90,38 @@ function About() {
                     </AnimatedSection>
 
                     {/* Divider */}
-                    <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-primary via-secondary to-accent rounded-full" />
+                    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-secondary to-accent rounded-full" />
 
                     {/* Right: Skills */}
-                    <AnimatedSection variants={bounceIn}>
-                        <motion.div
-                            className="grid grid-cols-3 sm:grid-cols-4 gap-8 justify-items-center"
-                            initial="hidden"
-                            animate="visible"
-                            variants={{
-                                visible: {
-                                    transition: { staggerChildren: 0.12 },
-                                },
-                            }}
+                    <div className="flex flex-col items-center md:items-start">
+                        <h1 className="text-4xl font-bold mb-6 text-center md:text-start">
+                            My<span className="text-primary"> Tech Skills</span>
+                        </h1>
+                        <AnimatedSection
+                            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center w-full"
+                            variants={bounceStaggeredContainer}
+                            initial="initial"
+                            whileInView="animate"
+                            viewport={{ once: true }}
                         >
-                            {skills.map((skill, i) => (
-                                <motion.div
-                                    key={i}
-                                    className={`relative group flex flex-col items-center p-5 bg-base-100 morph-border border border-base-content/10  shadow-md cursor-pointer backdrop-blur-md hover:shadow-[0_0_20px_var(--p)] transition-all ${randomBorders[i % randomBorders.length]}`}
-                                    whileHover={{ scale: 1.15, rotate: 3, z: 20 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 40 },
-                                        visible: { opacity: 1, y: 0 },
-                                    }}
-                                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                            {skills.map((skill, index) => (
+                                <AnimatedSection
+                                    key={index}
+                                    variants={bounceStaggeredItem}
+                                    custom={index}
+                                    className={`relative group flex flex-col items-center p-5 bg-base-100 morph-border border border-base-content/10 hover:border-primary/40 shadow-md cursor-pointer backdrop-blur-md hover:shadow-[0_0_20px_var(--p)] ${randomBorders[index % randomBorders.length]}`}
+                                    initial="initial"
+                                    whileInView="animate"
                                 >
                                     <div className="text-5xl animate-float-3d">{skill.icon}</div>
                                     <span className="mt-3 text-sm font-medium opacity-80 group-hover:text-primary transition-colors">
                                         {skill.name}
                                     </span>
-                                </motion.div>
+                                </AnimatedSection>
                             ))}
-                        </motion.div>
-                    </AnimatedSection>
+                        </AnimatedSection>
+
+                    </div>
                 </div>
             </div>
         </section>
