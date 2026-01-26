@@ -20,7 +20,7 @@ const projects = [
         description:
             "A modern MERN-based chat platform with real-time WebSockets, authentication and private routes.",
         github: "https://github.com/Ajay120503/fun-chat.git",
-        live: "https://chat-app-q8ci.onrender.com",
+        live: "https://fun-chat-y2tn.onrender.com",
     },
     {
         name: "CWF",
