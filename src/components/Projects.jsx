@@ -1,6 +1,7 @@
 import React from "react";
 import { Github, ExternalLink } from "lucide-react";
 import project0 from "../assets/projects/KAKSHA.png";
+import project6 from "../assets/projects/SECUREPASS.png";
 import project1 from "../assets/projects/FUNCHAT.png";
 import project2 from "../assets/projects/CWF.png";
 import project3 from "../assets/projects/SNIPPETSTORE.png";
@@ -22,6 +23,15 @@ const projects = [
       "Kaksha is a full-stack classroom management platform built using the MERN stack. It allows teachers to create and manage classes, assignments, and student interactions, while students can join classes, submit work, and communicate in real-time through an intuitive interface.",
     github: "https://github.com/Ajay120503/kaksh-v1.git",
     live: "https://kaksh-v1.vercel.app",
+  },
+  {
+    name: "SecureValute",
+    image: project6,
+    tech: "MongoDB, Express.js, React (Vite), Node.js, JWT, Tailwind CSS, DaisyUI, REST API",
+    description:
+      "SecureValute is a full-stack secure data storage platform built using the MERN stack. It allows users to safely store, manage, and access sensitive information such as passwords and personal data with strong authentication and encryption. The platform ensures data privacy with JWT-based authentication and a user-friendly interface for seamless management.",
+    github: "https://github.com/Ajay120503/SecureVault.git",
+    live: "https://secure-vault-pearl.vercel.app",
   },
   {
     name: "Fun Chat",
