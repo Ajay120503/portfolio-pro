@@ -1,6 +1,6 @@
 import React from "react";
 import { Github, ExternalLink } from "lucide-react";
-import project1 from "../assets/projects/KAKSHA.png";
+import project0 from "../assets/projects/KAKSHA.png";
 import project1 from "../assets/projects/FUNCHAT.png";
 import project2 from "../assets/projects/CWF.png";
 import project3 from "../assets/projects/SNIPPETSTORE.png";
@@ -14,52 +14,6 @@ import {
 import AnimatedSection from "../Animations/AnimatedSection";
 
 const projects = [
-<<<<<<< HEAD
-    {
-        name: "Fun Chat",
-        image: project1,
-        tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-        description:
-            "A modern MERN-based chat platform with real-time WebSockets, authentication and private routes.",
-        github: "https://github.com/Ajay120503/fun-chat.git",
-        live: "https://fun-chat-y2tn.onrender.com",
-    },
-    {
-        name: "CWF",
-        image: project2,
-        tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-        description:
-            "A real-time MERN chat app with secure authentication, protected routes, and active user tracking.",
-        github: "https://github.com/Ajay120503/chat-app",
-        live: "https://chat-app-q8ci.onrender.com/",
-    },
-    {
-        name: "Snippets Store",
-        image: project3,
-        tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-        description:
-            "A modern web app for developers to create, manage, and share reusable code snippets with an intuitive UI and secure authentication.",
-        github: "https://github.com/Ajay120503/snippet-store.git",
-        live: "https://snippets-store.vercel.app",
-    },
-    {
-        name: "Coder HUB",
-        image: project4,
-        tech: "MERN Stack, Tailwind CSS",
-        description:
-            "A collaborative MERN web application for real-time code editing and user collaboration via protected routes.",
-        github: "https://github.com/Ajay120503/coder-team-source-code.git",
-        live: "https://coder-hub-beta.vercel.app",
-    },
-    {
-        name: "Web HUB",
-        image: project5,
-        tech: "HTML, CSS, JavaScript",
-        description: "A web application for real-time code editing.",
-        github: "https://github.com/Ajay120503/web-hub-source-code.git",
-        live: "https://web-hub-alpha.vercel.app",
-    },
-=======
   {
     name: "Kaksha",
     image: project0,
@@ -76,7 +30,7 @@ const projects = [
     description:
       "A modern MERN-based chat platform with real-time WebSockets, authentication and private routes.",
     github: "https://github.com/Ajay120503/fun-chat.git",
-    live: "https://chat-app-q8ci.onrender.com",
+    live: "https://fun-chat-y2tn.onrender.com/",
   },
   {
     name: "CWF",
@@ -113,7 +67,6 @@ const projects = [
     github: "https://github.com/Ajay120503/web-hub-source-code.git",
     live: "https://web-hub-alpha.vercel.app",
   },
->>>>>>> cda375a (add the project)
 ];
 
 const badgeColors = [
