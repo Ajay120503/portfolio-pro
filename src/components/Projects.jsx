@@ -7,6 +7,9 @@ import project2 from "../assets/projects/CWF.png";
 import project3 from "../assets/projects/SNIPPETSTORE.png";
 import project4 from "../assets/projects/CODERHUB.png";
 import project5 from "../assets/projects/WEBHUB.png";
+import project6 from "../assets/projects/CAKESHOP.png";
+import project7 from "../assets/projects/PORTFOLIO.png";
+
 import {
   bounceInUp,
   bounceStaggeredItem,
@@ -76,6 +79,22 @@ const projects = [
     description: "A web application for real-time code editing.",
     github: "https://github.com/Ajay120503/web-hub-source-code.git",
     live: "https://web-hub-alpha.vercel.app",
+  },
+  {
+    name: "Cake shop",
+    image: project6,
+    tech: "MERN Stack",
+    description: "E-Commerce Websites",
+    github: "https://github.com/Ajay120503/cake-shop-client.git",
+    live: "https://cake-shop-murex-rho.vercel.app",
+  },
+  {
+    name: "Portfolio",
+    image: project7,
+    tech: "MERN Stack",
+    description: "MERK Stack Portfolio",
+    github: "https://github.com/Ajay120503/portfolio_client.git",
+    live: "https://portfolio-client-pearl-sigma.vercel.app",
   },
 ];
 
