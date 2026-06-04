@@ -7,7 +7,7 @@ import project2 from "../assets/projects/CWF.png";
 import project3 from "../assets/projects/SNIPPETSTORE.png";
 import project4 from "../assets/projects/CODERHUB.png";
 import project5 from "../assets/projects/WEBHUB.png";
-import project6 from "../assets/projects/CAKESHOP.png";
+import project8 from "../assets/projects/CAKESHOP.png";
 import project7 from "../assets/projects/PORTFOLIO.png";
 
 import {
@@ -82,7 +82,7 @@ const projects = [
   },
   {
     name: "Cake shop",
-    image: project6,
+    image: project8,
     tech: "MERN Stack",
     description: "E-Commerce Websites",
     github: "https://github.com/Ajay120503/cake-shop-client.git",
