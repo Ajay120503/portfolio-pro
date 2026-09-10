@@ -1,203 +1,126 @@
-import React from "react";
-import { Github, ExternalLink } from "lucide-react";
-import project0 from "../assets/projects/KAKSHA.png";
-import project6 from "../assets/projects/SECUREPASS.png";
-import project1 from "../assets/projects/FUNCHAT.png";
-import project2 from "../assets/projects/CWF.png";
-import project3 from "../assets/projects/SNIPPETSTORE.png";
-import project4 from "../assets/projects/CODERHUB.png";
-import project5 from "../assets/projects/WEBHUB.png";
-import project8 from "../assets/projects/CAKESHOP.png";
-import project7 from "../assets/projects/PORTFOLIO.png";
-
-import {
-  bounceInUp,
-  bounceStaggeredItem,
-  bounceStaggeredContainer,
-} from "../Animations/sectionVariants";
-import AnimatedSection from "../Animations/AnimatedSection";
-
-const projects = [
-  {
-    name: "Kaksha",
-    image: project0,
-    tech: "MongoDB, Express.js, React (Vite), Node.js, Tailwind CSS, DaisyUI, Socket.io, REST API",
-    description:
-      "Kaksha is a full-stack classroom management platform built using the MERN stack. It allows teachers to create and manage classes, assignments, and student interactions, while students can join classes, submit work, and communicate in real-time through an intuitive interface.",
-    github: "https://github.com/Ajay120503/kaksh-v1.git",
-    live: "https://kaksh-v1.vercel.app",
-  },
-  {
-    name: "SecureValute",
-    image: project6,
-    tech: "MongoDB, Express.js, React (Vite), Node.js, JWT, Tailwind CSS, DaisyUI, REST API",
-    description:
-      "SecureValute is a full-stack secure data storage platform built using the MERN stack. It allows users to safely store, manage, and access sensitive information such as passwords and personal data with strong authentication and encryption. The platform ensures data privacy with JWT-based authentication and a user-friendly interface for seamless management.",
-    github: "https://github.com/Ajay120503/SecureVault.git",
-    live: "https://secure-vault-pearl.vercel.app",
-  },
-  {
-    name: "Fun Chat",
-    image: project1,
-    tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-    description:
-      "A modern MERN-based chat platform with real-time WebSockets, authentication and private routes.",
-    github: "https://github.com/Ajay120503/fun-chat.git",
-    live: "https://fun-chat-y2tn.onrender.com/",
-  },
-  {
-    name: "CWF",
-    image: project2,
-    tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-    description:
-      "A real-time MERN chat app with secure authentication, protected routes, and active user tracking.",
-    github: "https://github.com/Ajay120503/chat-app",
-    live: "https://chat-app-q8ci.onrender.com/",
-  },
-  {
-    name: "Snippets Store",
-    image: project3,
-    tech: "MERN Stack, Vite, Tailwind CSS, DaisyUI, REST API",
-    description:
-      "A modern web app for developers to create, manage, and share reusable code snippets with an intuitive UI and secure authentication.",
-    github: "https://github.com/Ajay120503/snippet-store.git",
-    live: "https://snippets-store.vercel.app",
-  },
-  {
-    name: "Coder HUB",
-    image: project4,
-    tech: "MERN Stack, Tailwind CSS",
-    description:
-      "A collaborative MERN web application for real-time code editing and user collaboration via protected routes.",
-    github: "https://github.com/Ajay120503/coder-team-source-code.git",
-    live: "https://coder-hub-beta.vercel.app",
-  },
-  {
-    name: "Web HUB",
-    image: project5,
-    tech: "HTML, CSS, JavaScript",
-    description: "A web application for real-time code editing.",
-    github: "https://github.com/Ajay120503/web-hub-source-code.git",
-    live: "https://web-hub-alpha.vercel.app",
-  },
-  {
-    name: "Cake shop",
-    image: project8,
-    tech: "MERN Stack",
-    description: "E-Commerce Websites",
-    github: "https://github.com/Ajay120503/cake-shop-client.git",
-    live: "https://cake-shop-murex-rho.vercel.app",
-  },
-  {
-    name: "Portfolio",
-    image: project7,
-    tech: "MERN Stack",
-    description: "MERK Stack Portfolio",
-    github: "https://github.com/Ajay120503/portfolio_client.git",
-    live: "https://portfolio-client-pearl-sigma.vercel.app",
-  },
+import { useState } from "react";
+import { ArrowUpRight, Github } from "lucide-react";
+import { projects } from "../data/projects";
+import Reveal from "./Reveal";
+import SpotlightCard from "./react-bits/SpotlightCard";
+const filters = [
+  "All projects",
+  ...new Set(projects.map((project) => project.category)),
 ];
-
-const badgeColors = [
-    "from-primary/70 to-primary",
-    "from-secondary/70 to-secondary",
-    "from-accent/70 to-accent",
-    "from-info/70 to-info",
-    "from-success/70 to-success",
-    "from-warning/70 to-warning",
-    "from-error/70 to-error",
-];
-
-const Projects = () => {
-    return (
-        <section
-            id="projects"
-            className="flex items-center justify-center text-base-content relative overflow-hidden"
-        >
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-24">
-                {/* Heading */}
-                <AnimatedSection variants={bounceInUp}>
-                    <h1 className="text-4xl font-bold text-center mb-10 lg:mb-24">
-                        My <span className="text-primary">Projects</span>
-                    </h1>
-                </AnimatedSection>
-
-                {/* Project Grid */}
-                <AnimatedSection
-                    variants={bounceStaggeredContainer}
-                    initial="initial"
-                    whileInView="animate"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+export default function Projects() {
+  const [filter, setFilter] = useState("All projects");
+  const filtered = projects.filter(
+    (p) => filter === "All projects" || p.category === filter,
+  );
+  return (
+    <section id="projects" className="section work-section">
+      <div className="container">
+        <Reveal className="section-label">
+          <span>02 / SELECTED WORK</span>
+          <span>IDEAS, BROUGHT TO LIFE</span>
+        </Reveal>
+        <Reveal className="section-heading">
+          <h2>
+            Less talk.
+            <br />
+            <span className="serif accent">More building.</span>
+          </h2>
+          <p>
+            Recent builds and earlier explorations.
+            <br />
+            Ordered by the latest GitHub update, newest first.
+          </p>
+        </Reveal>
+        <div className="project-filters" aria-label="Filter projects">
+          {filters.map((item) => (
+            <button
+              key={item}
+              onClick={() => setFilter(item)}
+              aria-pressed={item === filter}
+              className={filter === item ? "selected" : ""}
+            >
+              {item}
+              {item === "All projects" && (
+                <span>{projects.length.toString().padStart(2, "0")}</span>
+              )}
+            </button>
+          ))}
+        </div>
+        <p className="sr-only" role="status">
+          Showing {filtered.length} of {projects.length} projects
+        </p>
+        <div className="project-grid">
+          {filtered.map((project) => (
+            <Reveal key={project.name}>
+              <SpotlightCard
+                className="project-card"
+                spotlightColor="rgba(240,139,82,0.08)"
+              >
+                <a
+                  className={`project-image project-color-${projects.indexOf(project) % 4}`}
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${project.name} live website`}
                 >
-                    {projects.map((project, index) => (
-                        <AnimatedSection
-                            key={index}
-                            variants={bounceStaggeredItem}
-                            custom={index}
-                            whileHover={{ y: -8 }}
-                            transition={{ type: "spring", stiffness: 200 }}
-                            className="relative rounded-2xl bg-base-200/60 border border-base-content/10 shadow-xl overflow-hidden group backdrop-blur-lg hover:shadow-2xl hover:border-primary/40"
-                        >
-                            {/* Image */}
-                            <div className="relative overflow-hidden">
-                                <img
-                                    src={project.image}
-                                    alt={project.name}
-                                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                                    <h2 className="text-lg font-bold text-white p-4">
-                                        {project.name}
-                                    </h2>
-                                </div>
-                            </div>
-
-                            {/* Card Body */}
-                            <div className="p-6 space-y-4">
-                                <p className="text-sm text-base-content/80 leading-relaxed">
-                                    {project.description}
-                                </p>
-
-                                {/* Tech stack badges */}
-                                <div className="flex flex-wrap gap-2">
-                                    {project.tech.split(",").map((stack, i) => (
-                                        <span
-                                            key={i}
-                                            className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${badgeColors[i % badgeColors.length]} shadow-sm`}
-                                        >
-                                            {stack.trim()}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Action Buttons */}
-                                <div className="flex justify-center gap-4 pt-4">
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="btn btn-sm btn-outline btn-primary hover:scale-105 transition-transform"
-                                    >
-                                        <Github size={18} />
-                                    </a>
-                                    <a
-                                        href={project.live}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="btn btn-sm btn-primary hover:scale-105 shadow-md"
-                                    >
-                                        <ExternalLink size={18} />
-                                    </a>
-                                </div>
-                            </div>
-                        </AnimatedSection>
+                  <div className="project-image-top">
+                    <span>
+                      {project.category.toUpperCase()} / WEB APPLICATION
+                    </span>
+                    <ArrowUpRight size={20} />
+                  </div>
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    style={{ objectFit: project.imageFit ?? "cover" }}
+                    loading="lazy"
+                    width="1440"
+                    height="900"
+                  />
+                </a>
+                <div className="project-body">
+                  <div className="project-title">
+                    <h3>{project.name}</h3>
+                    <span>
+                      {String(projects.indexOf(project) + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="project-date">
+                    Updated{" "}
+                    <time dateTime={project.updatedAt}>
+                      {new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                        timeZone: "UTC",
+                      }).format(new Date(project.updatedAt))}
+                    </time>
+                  </p>
+                  <p>{project.description}</p>
+                  <div className="project-tags">
+                    {project.tech.map((tech) => (
+                      <span key={tech}>{tech}</span>
                     ))}
-                </AnimatedSection>
-            </div>
-        </section>
-    );
-};
-
-export default Projects;
+                  </div>
+                  <div className="project-links">
+                    <a href={project.live} target="_blank" rel="noreferrer">
+                      View project <ArrowUpRight size={16} />
+                    </a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${project.name} source on GitHub`}
+                    >
+                      <Github size={16} /> Source code
+                    </a>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

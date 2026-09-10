@@ -1,172 +1,173 @@
 import { useState } from "react";
-import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
-import emailjs from "emailjs-com";
-import toast from "react-hot-toast";
-import { bounceInUp } from "../Animations/sectionVariants";
-import AnimatedSection from "../Animations/AnimatedSection";
-import { motion } from "framer-motion";
-
-function Contact() {
-    const [formData, setFormData] = useState({
-        user_name: "",
-        user_email: "",
-        user_phone: "",
-        message: "",
-    });
-
-    const [loading, setLoading] = useState(false);
-
-    const handleChange = (e) => {
-        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-
-    const validateForm = () => {
-        if (!formData.user_name.trim()) {
-            toast.error("Please enter your name");
-            return false;
-        }
-        if (!formData.user_email.trim()) {
-            toast.error("Please enter your email");
-            return false;
-        }
-        const emailRegex = /\S+@\S+\.\S+/;
-        if (!emailRegex.test(formData.user_email)) {
-            toast.error("Please enter a valid email address");
-            return false;
-        }
-        if (!formData.message.trim()) {
-            toast.error("Message cannot be empty");
-            return false;
-        }
-        return true;
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!validateForm()) return;
-
-        setLoading(true);
-
-        emailjs
-            .send(
-                "service_tslitio",
-                "template_sf4lqi6",
-                formData,
-                "juI-kUY0pvSq6XNDx"
-            )
-            .then(
-                () => {
-                    toast.success("Message sent successfully! 🎉");
-                    setFormData({
-                        user_name: "",
-                        user_email: "",
-                        user_phone: "",
-                        message: "",
-                    });
-                },
-                () => {
-                    toast.error("Failed to send message. Please try again.");
-                }
-            )
-            .finally(() => setLoading(false));
-    };
-
-    return (
-        <section
-            id="contact"
-            className="flex items-center justify-center text-base-content relative overflow-hidden"
-        >
-            <AnimatedSection variants={bounceInUp}>
-                <div className="w-full max-w-xl mx-auto px-4 sm:px-8 lg:px-12 py-20">
-                    {/* Heading */}
-                    <h1 className="text-4xl font-bold text-center mb-10 lg:mb-24">
-                        Get in <span className="text-primary">Touch</span>
-                    </h1>
-                    <p className="text-center mb-12 text-base-content/70">
-                        Have a question or want to work together? Drop me a message below 👇
-                    </p>
-
-                    {/* Glassmorphic Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="card relative bg-base-300/80 backdrop-blur-lg shadow-2xl border border-primary/20 hover:border-primary/50 transition-all p-8 rounded-2xl"
-                    >
-                        {/* Glow effect */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20"></div>
-
-                        <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
-                            {/* Name */}
-                            <motion.label
-                                whileFocus={{ scale: 1.02 }}
-                                className="input w-full input-bordered flex items-center gap-2 bg-base-100 text-base-content focus-within:ring-2 focus-within:ring-primary transition"
-                            >
-                                <FaUser className="text-primary" />
-                                <input
-                                    type="text"
-                                    name="user_name"
-                                    value={formData.user_name}
-                                    onChange={handleChange}
-                                    className="grow bg-transparent focus:outline-none"
-                                    placeholder="Your Name"
-                                />
-                            </motion.label>
-
-                            {/* Email */}
-                            <label className="input w-full input-bordered flex items-center gap-2 bg-base-100 text-base-content focus-within:ring-2 focus-within:ring-primary transition">
-                                <FaEnvelope className="text-primary" />
-                                <input
-                                    type="email"
-                                    name="user_email"
-                                    value={formData.user_email}
-                                    onChange={handleChange}
-                                    className="grow bg-transparent focus:outline-none"
-                                    placeholder="Your Email"
-                                />
-                            </label>
-
-                            {/* Phone */}
-                            <label className="input w-full input-bordered flex items-center gap-2 bg-base-100 text-base-content focus-within:ring-2 focus-within:ring-primary transition">
-                                <FaPhone className="text-primary" />
-                                <input
-                                    type="tel"
-                                    name="user_phone"
-                                    value={formData.user_phone}
-                                    onChange={handleChange}
-                                    className="grow bg-transparent focus:outline-none"
-                                    placeholder="Your Phone (optional)"
-                                />
-                            </label>
-
-                            {/* Message */}
-                            <textarea
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                className="textarea textarea-bordered bg-base-100 text-base-content w-full h-36 resize-none focus:ring-2 focus:ring-primary transition"
-                                placeholder="Your Message"
-                            ></textarea>
-
-                            {/* Submit */}
-                            <button
-                                type="submit"
-                                className="btn btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70"
-                                disabled={loading}
-                            >
-                                {loading ? (
-                                    <span className="loading loading-spinner loading-sm"></span>
-                                ) : (
-                                    "Send Message"
-                                )}
-                            </button>
-                        </form>
-                    </motion.div>
-                </div>
-            </AnimatedSection>
-        </section>
-    );
+import { ArrowUpRight, Check, Copy, Github, Linkedin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import Reveal from "./Reveal";
+const email = "ajaykandhare12@gmail.com";
+export default function Contact() {
+  const [state, setState] = useState("idle");
+  const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
+  async function submit(event) {
+    event.preventDefault();
+    if (state === "sending") return;
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    if (!data.user_name.trim() || !data.message.trim()) {
+      setState("invalid");
+      return;
+    }
+    setState("sending");
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_tslitio",
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_sf4lqi6",
+        data,
+        {
+          publicKey:
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "juI-kUY0pvSq6XNDx",
+        },
+      );
+      setState("success");
+      form.reset();
+    } catch {
+      setState("error");
+    }
+  }
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setCopyError(false);
+    } catch {
+      setCopyError(true);
+    }
+  }
+  return (
+    <section id="contact" className="section contact-section">
+      <div className="container">
+        <Reveal className="section-label">
+          <span>05 / GET IN TOUCH</span>
+          <span>GREAT THINGS START WITH A CONVERSATION</span>
+        </Reveal>
+        <div className="contact-grid">
+          <Reveal>
+            <span className="contact-star" aria-hidden="true">
+              ✳
+            </span>
+            <h2>
+              Have something
+              <br />
+              in <span className="serif accent">mind?</span>
+            </h2>
+            <p>
+              A project, an opportunity, or just a hello.
+              <br />
+              I’d love to hear what you’re thinking.
+            </p>
+            <div className="email-link">
+              <a href={`mailto:${email}`}>{email}</a>
+              <button
+                onClick={copyEmail}
+                aria-label={copied ? "Email copied" : "Copy email address"}
+              >
+                {copied ? <Check size={18} /> : <Copy size={18} />}
+              </button>
+            </div>
+            <span className="copy-status" role="status">
+              {copied
+                ? "Email address copied."
+                : copyError
+                  ? "Please select the email address to copy it."
+                  : ""}
+            </span>
+            <div className="contact-socials">
+              <a
+                href="https://github.com/Ajay120503"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Github size={17} /> GitHub <ArrowUpRight size={15} />
+              </a>
+              <a
+                href="https://in.linkedin.com/in/ajay-k-178008239"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Linkedin size={17} /> LinkedIn <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <form className="contact-form" onSubmit={submit}>
+              <div className="form-row">
+                <label>
+                  Your name
+                  <input
+                    name="user_name"
+                    autoComplete="name"
+                    placeholder="Alex Morgan"
+                    required
+                    maxLength={100}
+                  />
+                </label>
+                <label>
+                  Email address
+                  <input
+                    type="email"
+                    name="user_email"
+                    autoComplete="email"
+                    placeholder="alex@example.com"
+                    required
+                    maxLength={254}
+                  />
+                </label>
+              </div>
+              <label>
+                Phone <span>(optional)</span>
+                <input
+                  type="tel"
+                  name="user_phone"
+                  autoComplete="tel"
+                  placeholder="Your phone number"
+                  maxLength={30}
+                />
+              </label>
+              <label>
+                What are you thinking?
+                <textarea
+                  name="message"
+                  placeholder="Tell me a little about your project or idea…"
+                  required
+                  minLength={10}
+                  maxLength={5000}
+                  rows={5}
+                />
+              </label>
+              <button
+                type="submit"
+                className="button primary"
+                disabled={state === "sending"}
+              >
+                {state === "sending" ? "Sending message…" : "Send message"}
+                <ArrowUpRight size={18} />
+              </button>
+              <p
+                className={`form-status ${state}`}
+                role="status"
+                aria-live="polite"
+              >
+                {state === "success"
+                  ? "Thanks for reaching out! Your message has been sent."
+                  : state === "error"
+                    ? "Your message could not be sent. Please try again or email me directly."
+                    : state === "invalid"
+                      ? "Please enter your name and a message."
+                      : "Have a brief? A rough idea is a great place to start."}
+              </p>
+            </form>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 }
-
-export default Contact;

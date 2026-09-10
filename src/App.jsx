@@ -1,70 +1,42 @@
+import {
+  MotionConfig,
+  motion as Motion,
+  useScroll,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import EducationTimeline from "./components/EducationTimeline";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import "./App.css";
-import Navbar from "./components/Navbar.jsx";
-import Hero from "./components/Hero.jsx";
-import About from "./components/About.jsx";
-import Projects from "./components/Projects.jsx";
-import Skills from "./components/Skills.jsx";
-import Contact from "./components/Contact.jsx";
-import Footer from "./components/Footer.jsx";
-import { Toaster } from "react-hot-toast";
-import EducationTimeline from "./components/EducationTimeline.jsx";
-import { useThemeStore } from "./store/useThemeStore.js";
-import { useEffect } from "react";
-
-function App() {
-  const initializeTheme = useThemeStore((state) => state.initializeTheme);
-
-  useEffect(() => {
-    initializeTheme();
-  }, [initializeTheme]);
+export default function App() {
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 110, damping: 30 });
+  const reduced = useReducedMotion();
   return (
-    <div className="bg-base-200 text-base-content" >
-      {/* Toast Notifications */}
-      <Toaster position="top-right" />
-
-      {/* Fixed Navbar */}
+    <MotionConfig reducedMotion="user">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <Motion.div
+        className="scroll-progress"
+        style={{ scaleX: reduced ? scrollYProgress : progress }}
+      />
       <Navbar />
-
-      {/* Main Content */}
-      <main className="scroll-smooth min-h-screen bg-base-100">
-        {/* Hero Section - Fullscreen */}
-        <section id="home" className="bg-base-200">
-          <Hero />
-        </section>
-
-        {/* About Section */}
-        <section id="about" className="bg-base-300">
-          <About />
-        </section>
-
-        {/* Projects Section */}
-        <section id="projects" className="bg-base-200">
-
-          <Projects />
-        </section>
-
-        {/* Skills Section */}
-        <section id="skills" className="bg-base-100">
-          <Skills />
-
-        </section>
-
-        {/* Education Section */}
-        <section id="education" className="bg-base-300" >
-          <EducationTimeline />
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="bg-base-200" >
-          <Contact />
-        </section>
-
+      <main id="main">
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <EducationTimeline />
+        <Contact />
       </main>
-
-      {/* Footer */}
       <Footer />
-    </div>
+    </MotionConfig>
   );
 }
-
-export default App;
